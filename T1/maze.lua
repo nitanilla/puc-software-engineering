@@ -1,15 +1,28 @@
+-- TITLE:		Maze
+-- AUTHOR:		Renan Almeida
+-- DATE:		09/04/2017
+-- VERSION: 	1.1
+-- CONTENT: 	~120 lines  
 
 -- Maze class
 Maze = {}
 
--- Constructor
+--[[
+
+Construtor da classe Maze.
+
+PRE-CONDIÇÕES: Os parâmetros passados são números inteiros maiores que zero.
+
+POS-CONDIÇÕES: Uma instância da classe maze foi correntamente inicializada.
+
+--]]
 function Maze:new(numberOfRows, numberOfColumns)
 	-- Basic initialization
 	local matrix = {}
 	for i = 1, numberOfRows do
 		matrix[i] = {}
 		for j = 1, numberOfColumns do
-			matrix[i][j] = {}
+			matrix[i][j] = " "
 		end
 	end
 
@@ -31,76 +44,75 @@ function Maze:new(numberOfRows, numberOfColumns)
 	return instance
 end
 
--- Populates de maze
-function Maze:populate(numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets)
+--[[
+
+Função responsável por inserir a quantidade dada de morcegos, abismos e
+diamantes em posições randômicas no labirinto.
+
+PRE-CONDIÇÕES: O labirinto foi corretamente inicializado e os parâmetros
+passados são números inteiros não negativos.
+
+POS-CONDIÇÕES: O labirinto possuirá a quantidade passada de morcegos, abismos
+e diamantes.
+
+--]]
+function Maze:populate(bats, pits, diamonds)
 	-- If the quantity of any element is negative, returns false
-	local numberOfElements = numberOfWumpus + numberOfBats + numberOfPits
-	if numberOfWumpus < 0 or numberOfBats < 0 or numberOfPits < 0 or numberOfGoldNuggets < 0 then
+	if bats < 0 or pits < 0 or diamonds < 0 then
 		return false
 	end
 
 	-- If the maze is not large enough, returns false
+	local numberOfElements = bats + pits + diamonds
 	if (numberOfElements >= self._numberOfRows * self._numberOfColumns) then
 		return false
 	end
 
-	local elementArray, number = {}, 1
+	local elements, index = {}, 1
 
-	-- Wumpus
-	for i = 1, numberOfWumpus do
-		elementArray[number] = "W"
-		number = number + 1
+	-- Auxiliary function used to fill the maze
+	local fill = function (number, symbol)
+		for i = 1, number do elements[index] = symbol; index = index + 1 end
 	end
 
-	-- Bats
-	for i = 1, numberOfBats do
-		elementArray[number] = "B"
-		number = number + 1
-	end
-
-	-- Pits
-	for i = 1, numberOfPits do
-		elementArray[number] = "P"
-		number = number + 1
-	end
+	fill(bats, "B")
+	fill(pits, "P")
+	fill(diamonds, "D")
 
 	-- Fills the maze with wumpus, bats and pits
+	math.randomseed(os.time())
 	for i = 1, numberOfElements do
-		local randomRow, randomColumn
-		repeat
-			randomRow = math.random(self._numberOfRows)
-			randomColumn = math.random(self._numberOfColumns)
-		until (length(self._matrix[randomRow][randomColumn]) > 0) or
-			(randomRow == self._startingPosition.i and
-			randomColumn == self._startingPosition.j)
-
-		local room = self._matrix[randomRow][randomColumn]
-		room[length(room) + 1] = elementArray[i]
+		local randomRow = math.random(self._numberOfRows)
+		local randomColumn = math.random(self._numberOfColumns)
+		self._matrix[randomRow][randomColumn] = elements[i]
 	end
-
-	return true
 end
 
--- Prints the maze
+--[[
+
+Função responsável por imprimir o estado corrente do labirinto.
+
+PRE-CONDIÇÕES: O labirinto foi corretamente inicializado.
+
+POS-CONDIÇÕES: Uma representação ASCII do labirinto será imprimida na tela.
+
+--]]
 function Maze:print()
 	for i = 1, self._numberOfRows do
 		for j = 1, self._numberOfColumns do
-			-- print(self._matrix[i][j])
-			for k, v in pairs(self._matrix[i][j]) do
-			   print(k, v)
-			end
+			io.write(self._matrix[i][j])
+			if j ~= self._numberOfColumns then io.write("-") end
 		end
 		io.write("\n")
+		if i ~= self._numberOfRows then
+			for j = 1, 2 * self._numberOfColumns do
+				if j % 2 ~= 0 then
+					io.write("|")
+				else
+					io.write(" ")
+				end
+			end
+			io.write("\n")
+		end
 	end
 end
-
--- Auxialiary
-
--- Table length
-function length(t)
-	local counter = 0
-	for _, _ in ipairs(t) do counter = counter + 1 end
-	return counter
-end
-
-

@@ -1,2 +1,10 @@
-# puc-software-engineering
-Repository for class INF1629 at PUC-Rio.
+# PUC-Rio Software Engineering (INF1629)
+Renan Almeida
+
+## Anotações
+
+09/04 - Criação da classe Maze
+
+10/04 - Criação do teste para a classe Maze
+
+10/04 - Criação do repositório do projeto

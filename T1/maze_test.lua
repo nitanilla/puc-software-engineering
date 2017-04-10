@@ -1,51 +1,27 @@
+-- TITLE:		Maze Test
+-- AUTHOR:		Renan Almeida
+-- DATE:		10/04/2017
+-- VERSION: 	1.0
+-- CONTENT: 	~25 lines  
 
--- Imports
 dofile "maze.lua"
 
--- Maze tests
-do
-	do -- Constructor
-		local numberOfRows, numberOfColumns = 4, 4
-		local maze = Maze:new(numberOfRows, numberOfColumns)
+-- O teste cria três labirintos de tamanhos diferentes e imprime eles na tela.
 
-		-- _numberOfRows
-		assert(maze._numberOfRows == numberOfRows, "Maze - Error - _numberOfRows")
+-- Maze 1
+local maze = Maze:new(5, 5)
+local bats, pits, diamonds = 5, 2, 1
+local r = maze:populate(bats, pits, diamonds)
+maze:print()
 
-		-- _numberOfColumns
-		assert(maze._numberOfRows == numberOfColumns, "Maze - Error - _numberOfColumns")
+-- Maze 2
+local maze = Maze:new(10, 10)
+local bats, pits, diamonds = 10, 12, 1
+local r = maze:populate(bats, pits, diamonds)
+maze:print()
 
-		-- _matrix
-		for i = 1, numberOfRows do
-			for j = 1, numberOfRows do
-				assert(maze._matrix[i][j], "Maze - Error - _matrix " .. i .. j)
-			end
-		end
-	end
-
-	do -- Populate
-		do -- OK
-			local numberOfRows, numberOfColumns = 4, 4
-			local maze = Maze:new(numberOfRows, numberOfColumns)
-			local numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets = 1, 2, 2, 1
-			local r = maze:populate(numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets)
-			assert(r == true, "Maze - Error - populate")
-			maze:print()
-		end
-
-		do -- Quantity of any element is negative
-			local numberOfRows, numberOfColumns = 4, 4
-			local maze = Maze:new(numberOfRows, numberOfColumns)
-			local numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets = 1, -2, 4, -1
-			local r = maze:populate(numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets)
-			assert(r == false, "Maze - Error - populate - Quantity of any element is negative")
-		end
-
-		do -- Number of elements is too big
-			local numberOfRows, numberOfColumns = 2, 2
-			local maze = Maze:new(numberOfRows, numberOfColumns)
-			local numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets = 1, 2, 2, 1
-			local r = maze:populate(numberOfWumpus, numberOfBats, numberOfPits, numberOfGoldNuggets)
-			assert(r == false, "Maze - Error - populate - Number of elements is too big")
-		end
-	end
-end
+-- Maze 3
+local maze = Maze:new(15, 15)
+local bats, pits, diamonds = 1, 1, 1
+local r = maze:populate(bats, pits, diamonds)
+maze:print()
