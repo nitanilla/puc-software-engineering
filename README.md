@@ -8,3 +8,5 @@ Renan Almeida
 10/04 - Criação do teste para a classe Maze
 
 10/04 - Criação do repositório do projeto
+
+11/04 - Atualização do programa com legendas

@@ -28,6 +28,9 @@ function Maze:new(numberOfRows, numberOfColumns)
 
 	-- Variables
 	local instance = {
+		-- Variables with underline are to be accessed outside this module
+		-- at the programmers own risk. They are considered private by the
+		-- Maze class.
 		_numberOfRows = numberOfRows,
 		_numberOfColumns = numberOfColumns,
 		_matrix = matrix,
@@ -79,7 +82,7 @@ function Maze:populate(bats, pits, diamonds)
 	fill(pits, "P")
 	fill(diamonds, "D")
 
-	-- Fills the maze with wumpus, bats and pits
+	-- Fills the maze with bats, pits and diamonds
 	math.randomseed(os.time())
 	for i = 1, numberOfElements do
 		local randomRow = math.random(self._numberOfRows)
