@@ -6,8 +6,8 @@ Gabriel Gomes
 
 ## Estilos escolhidos
 
-- AA - Estilo A
-- BB - Estilo B
+- 03 - Monolith
+- 05 - Pipeline
 - CC - Estilo C
 - DD - Estilo D
 
