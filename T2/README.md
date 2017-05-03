@@ -13,4 +13,5 @@ Gabriel Gomes
 
 ## Anotações
 
-- TODO
+- 03/05 - Estudo de Lua; Programação de um dos exemplos com o estilo "pipeline";
+Criação do diagrama para o estilo "pipeline". 
