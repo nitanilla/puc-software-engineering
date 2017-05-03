@@ -13,5 +13,9 @@ Gabriel Gomes
 
 ## Anotações
 
+- 30/04 - Criação da pasta do trabalho 2 dentro do repositório.
+
+- 02/05 - Programação de um dos exemplos com o estilo "monolith".
+
 - 03/05 - Estudo de Lua; Programação de um dos exemplos com o estilo "pipeline";
 Criação do diagrama para o estilo "pipeline". 
