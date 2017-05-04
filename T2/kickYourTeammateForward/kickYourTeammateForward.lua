@@ -25,7 +25,7 @@ end
 -- vazia.
 -- POS: A string recebida de entrada foi reformatada com sucesso.
 function filterChars(str_data, func)
-	local pattern = "%w"
+	local pattern = "%w+"
 	func(str_data:gsub(pattern, ' '), scan)
 end
 
@@ -123,7 +123,6 @@ function sort(word_freq, func)
 end
 
 function trim(s)
-  -- from PiL2 20.4
   return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
