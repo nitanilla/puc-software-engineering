@@ -103,7 +103,7 @@ end
 --      caracteres alfanuméricos, que não sejam iguais a nenhuma stop word.
 --      Stop words são as palavras contidas no arquivo stop_words.txt
 function nonStopWords(filename)
-    local stopWords = set(assert(io.open('stop_words.txt', 'r')):read('*all'):split(','))
+    local stopWords = set(assert(io.open('../stop_words.txt', 'r')):read('*all'):split(','))
     local allWordsIterator = allWords(filename)
 
     return (function() 

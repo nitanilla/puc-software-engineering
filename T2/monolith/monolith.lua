@@ -2,10 +2,10 @@
 -- Autor:				Renan Almeida & Gabriel Gomes
 -- Última modificação:	04-05-2017
 -- Versão: 				1.1
--- Tamanho: 			TODO
+-- Tamanho: 			110 linhas
 
 --[[
-Observações
+Observações:
 
 - Como o estilo monolito não permite a criação de
 funções auxiliares, não é possível atender o critério da
@@ -45,19 +45,14 @@ while true do
 
     -- Conferindo caracter por caracter
 	for c in line:gmatch(".") do
-		-- print("Char: " .. c .. " - i: " .. i)
-
 		local isAlphaNumeric = c:match("%w") ~= nil
-		-- print("IsAlpha: " .. tostring(isAlphaNumeric))
 
 		-- Se é início de uma palavra
 		if startChar == 0 and isAlphaNumeric then
-			-- print("Início de palavra")
 			startChar = i
 
 		-- Se é o final de uma palavra
 		elseif not isAlphaNumeric then
-			-- print("Final: " .. line .. "\nrange: " .. startChar .. "-" .. i - 1)
 			local word = string.sub(line, startChar, i - 1):lower()
 
 			-- Conferindo se é stopWord
@@ -68,9 +63,6 @@ while true do
 					break
 				end
 			end
-
-			-- print("É stopWord: " .. tostring(not isNotStopWord))
-			-- print("Palavra: " .. word)
 
 			-- Se não é stopWord então processa a palavra
 			if isNotStopWord then
@@ -99,20 +91,19 @@ while true do
 
 			-- Resetando
 			startChar = 0
-			-- print()
 		end
 
 		i = i + 1
 	end
-
-	-- print()
 end
 
 file:close()
 
+counter = 1
 for _, v in ipairs(wordsFreqs) do
     print(v[1] .. " - " .. v[2])
-    if i == 25 then
+    if counter == 25 then
     	break
     end
+    counter = counter + 1
 end

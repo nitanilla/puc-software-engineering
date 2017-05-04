@@ -11,7 +11,7 @@ Gabriel Gomes - 1412845
 - 08 - Kick Forward
 - 27 - Lazy Rivers
 
-## Anotações
+## Anotações (livro diário)
 
 - 30/04 - Criação da pasta do trabalho 2 dentro do repositório;
 

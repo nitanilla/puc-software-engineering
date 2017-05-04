@@ -12,9 +12,9 @@ TOP = arg[2] or 25
 -- Função lê um arquivo de entrada e retorna seu conteúdo em uma string.
 -- PRE: O arquivo está presente no sistema de diretórios.
 -- POS: O arquivo foi lido com sucesso e seu conteúdo foi retornado.
-function readFile(path_to_file, func)
-	local f = assert(io.open(arg[1], 'r'))
-	local data = f:read('*all')
+function readFile(path, func)
+	local f = assert(io.open(path, "r"))
+	local data = f:read("*all")
 	f:close()
 	func(data, normalize)
 end
@@ -24,27 +24,15 @@ end
 -- PRE: A string recebida por patâmetro representa o conteúdo de um arquivo e é não
 -- vazia.
 -- POS: A string recebida de entrada foi reformatada com sucesso.
-function filterChars(str_data, func)
-	local pattern = "%w+"
-	func(str_data:gsub(pattern, ' '), scan)
+function filterChars(data, func)
+	func(data:gsub("%W+", " "), scan)
 end
 
 -- Função deixa todas as letras minúsculas.
 -- PRE: A string a ser normalizada.
 -- POS: A string já normalizada.
-function normalize(str_data, func)
-	func(str_data:lower(), removeStopWords)
-end
-
--- Função auxiliar separa uma string num array, baseado num separador.
--- PRE: O input é o separador
--- POS: Retorna um array cujos elementos são as substrings da recebida por parâmetro,
--- tendo em vista o separador dado.
-function string:split(sep)
-	local fields = {}
-	local pattern = string.format("%s+", sep)
-	self:gsub(pattern, function(c) fields[#fields+1] = c end)
-	return fields
+function normalize(data, func)
+	func(data:lower(), removeStopWords)
 end
 
 -- Função recebe uma string e busca por palavras, retornando uma tabela com as
@@ -52,40 +40,39 @@ end
 -- PRE: A string recebida está formatada para ter apenas palavras em lowercase e
 -- separadas por espaços.
 -- POS: A tabela indexada pelas paravras foi criada.
-function scan(str_data, func)
-	func(str_data:split(' '), frequencies)
-end
-
--- Função auxiliar para saber se um value está numa table.
--- PRE: O valor e a tabela são válidos.
--- POS: Retorna true ou false caso o valor esteja ou não.
-function valueInTable(val, tab)
-	for _, v in pairs(tab) do
-		if v == val then
-			return true
-		end
+function scan(data, func)
+	local words = {}
+	for word in data:gmatch("%S+") do
+		table.insert(words, word)
 	end
-
-	return false
+	func(words, frequencies)
 end
 
 -- Função retira as stop words de uma tabela de palavras.
 -- PRE: Recebe uma tabela indexada por palavras.
 -- POS: Retorna uma cópia da entrada com as stop words removidas.
-function removeStopWords(word_list, func)
-	local non_stop = {}
-	local stop_words = assert(io.open("stop_words.txt", 'r')):read('*all'):lower():split("[^,]+")
+function removeStopWords(words, func)
+	local file = assert(io.open("../stop_words.txt", "r"))
+	local data = file:read("*all")
+	file:close()
 
-	for i = 97,97+25 do
-		stop_words[i + #stop_words] = string.char(i)
+	local stopWords = {}
+	for stopWord in data:gmatch("[^,]+") do
+		table.insert(stopWords, stopWord:lower())
 	end
 
-	for _, word in pairs(word_list) do
-		if not valueInTable(word, stop_words) then
-			table.insert(non_stop, word)
+	local filteredWords = {}
+	for _, word in ipairs(words) do
+		for _, stopWord in ipairs(stopWords) do
+			if word == stopWord then
+				goto doNotInsert
+			end
 		end
+		table.insert(filteredWords, word)
+		::doNotInsert::
 	end
-	func(non_stop, sort)
+
+	func(filteredWords, sort)
 end
 
 -- Função recebe uma tabela de palavras e retorna um dicionário associando
@@ -122,23 +109,19 @@ function sort(word_freq, func)
 	func(word_freq, noOp)
 end
 
-function trim(s)
-  return (s:gsub("^%s*(.-)%s*$", "%1"))
-end
-
 -- Função recebe um dicionário de pares em que as estradas estão ordenadas
 -- por frequência e as imprime.
 -- PRE: O dicionário de pares tem as palavras ordenadas pela frequência e o índice
 -- da recursção.
 -- POS: Terão sido impressos na tela as palavras e os suas frequências.
 function printText(word_freqs, func)
-    local i = 1
+    local i = 0
     
     for _, w in ipairs(word_freqs) do
     	if i == TOP then
     		break
     	end
-    	print(trim(w.word .. " - " .. w.freq))
+    	print(w.word .. " - " .. w.freq)
     	i = i + 1
     end
     func(nil)
