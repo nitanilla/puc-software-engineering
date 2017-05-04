@@ -4,39 +4,39 @@
 -- Autor:				Renan Almeida & Gabriel Gomes
 -- Última modificação:	02-05-2017
 -- Versão: 				1.0
--- Tamanho: 			155 linhas
+-- Tamanho: 			156 linhas
 
--- Número de palavas mais frequentes que desejamos imprimir
+-- Número de palavas mais frequentes que serão impressas
 TOP = arg[2] or 25
 
--- Função que lê um arquivo de entrada e retorna seu conteúdo num string.
+-- Função lê um arquivo de entrada e retorna seu conteúdo em uma string.
 -- PRE: O arquivo está presente no sistema de diretórios.
 -- POS: O arquivo foi lido com sucesso e seu conteúdo foi retornado.
-function read_file(path_to_file, func)
+function readFile(path_to_file, func)
 	local f = assert(io.open(arg[1], 'r'))
 	local data = f:read('*all')
 	f:close()
 	func(data, normalize)
 end
 
--- Função que recebe uma string e retorna uma cópia com todos os caracteres
+-- Função recebe uma string e retorna uma cópia com todos os caracteres
 -- não alfanuméricos substituídos por um espaço em branco cada.
 -- PRE: A string recebida por patâmetro representa o conteúdo de um arquivo e é não
 -- vazia.
 -- POS: A string recebida de entrada foi reformatada com sucesso.
-function filter_chars(str_data, func)
+function filterChars(str_data, func)
 	local pattern = "%w"
 	func(str_data:gsub(pattern, ' '), scan)
 end
 
--- Função que deixa todas as letras minúsculas.
+-- Função deixa todas as letras minúsculas.
 -- PRE: A string a ser normalizada.
 -- POS: A string já normalizada.
 function normalize(str_data, func)
-	func(str_data:lower(), remove_stop_words)
+	func(str_data:lower(), removeStopWords)
 end
 
--- Função auxiliar que separa uma string num array, baseado num separador.
+-- Função auxiliar separa uma string num array, baseado num separador.
 -- PRE: O input é o separador
 -- POS: Retorna um array cujos elementos são as substrings da recebida por parâmetro,
 -- tendo em vista o separador dado.
@@ -47,7 +47,7 @@ function string:split(sep)
 	return fields
 end
 
--- Função que recebe uma string e busca por palavras, retornando uma tabela com as
+-- Função recebe uma string e busca por palavras, retornando uma tabela com as
 -- palavras encontradas.
 -- PRE: A string recebida está formatada para ter apenas palavras em lowercase e
 -- separadas por espaços.
@@ -59,7 +59,7 @@ end
 -- Função auxiliar para saber se um value está numa table.
 -- PRE: O valor e a tabela são válidos.
 -- POS: Retorna true ou false caso o valor esteja ou não.
-function value_in_table(val, tab)
+function valueInTable(val, tab)
 	for _, v in pairs(tab) do
 		if v == val then
 			return true
@@ -69,10 +69,10 @@ function value_in_table(val, tab)
 	return false
 end
 
--- Função que retira as stop words de uma tabela de palavras.
+-- Função retira as stop words de uma tabela de palavras.
 -- PRE: Recebe uma tabela indexada por palavras.
 -- POS: Retorna uma cópia da entrada com as stop words removidas.
-function remove_stop_words(word_list, func)
+function removeStopWords(word_list, func)
 	local non_stop = {}
 	local stop_words = assert(io.open("stop_words.txt", 'r')):read('*all'):lower():split("[^,]+")
 
@@ -81,14 +81,14 @@ function remove_stop_words(word_list, func)
 	end
 
 	for _, word in pairs(word_list) do
-		if not value_in_table(word, stop_words) then
+		if not valueInTable(word, stop_words) then
 			table.insert(non_stop, word)
 		end
 	end
 	func(non_stop, sort)
 end
 
--- Função que recebe uma tabela de palavras e retorna um dicionário associando
+-- Função recebe uma tabela de palavras e retorna um dicionário associando
 -- palavras com suas frequências de ocorrência.
 -- PRE: A tabela recebida têm as palavras a seren contadas.
 -- POS: As palavras agora têm suas respectivas ordens de ocorrência.
@@ -109,17 +109,17 @@ function frequencies(word_list, func)
 		table.insert(word_freq, pair)
 	end
 
-	func(word_freq, print_text)
+	func(word_freq, printText)
 end
 
--- Função que recebe um dicionário de palavras e suas frequências e retorna um
+-- Função recebe um dicionário de palavras e suas frequências e retorna um
 -- dicionário de pares ordenados pela frequência.
 -- PRE: O input é um dicionário que apresenta palavras e suas frequências, em
 -- qualquer ordem.
 -- POS: O dicionário está ordenado pela frequência.
 function sort(word_freq, func)
 	table.sort(word_freq, function(a, b) return a.freq > b.freq end)
-	func(word_freq, no_op)
+	func(word_freq, noOp)
 end
 
 function trim(s)
@@ -127,12 +127,12 @@ function trim(s)
   return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
--- Função que recebe um dicionário de pares em que as estradas estão ordenadas
+-- Função recebe um dicionário de pares em que as estradas estão ordenadas
 -- por frequência e as imprime.
 -- PRE: O dicionário de pares tem as palavras ordenadas pela frequência e o índice
 -- da recursção.
 -- POS: Terão sido impressos na tela as palavras e os suas frequências.
-function print_text(word_freqs, func)
+function printText(word_freqs, func)
     local i = 1
     
     for _, w in ipairs(word_freqs) do
@@ -148,8 +148,8 @@ end
 -- Funcão "base", fim das passagens de função.
 -- PRE: Função sendo passada.
 -- POS: Fim do empilhamento.
-function no_op(func)
+function noOp(func)
 	return
 end
 
-read_file(arg[1], filter_chars)
+readFile(arg[1], filterChars)

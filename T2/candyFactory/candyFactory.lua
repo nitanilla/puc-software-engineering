@@ -74,8 +74,7 @@ end
 -- POS: Retorna uma cópia da entrada com as stop words removidas.
 function removeStopWords(word_list, func)
 	local non_stop = {}
-	local file = assert(io.open("../stop_words.txt", 'r')):
-	local stop_words = file:read('*all'):lower():split("[^,]+")
+	local stop_words = assert(io.open("stop_words.txt", 'r')):read('*all'):lower():split("[^,]+")
 
 	for i = 97,97+25 do
 		stop_words[i + #stop_words] = string.char(i)
