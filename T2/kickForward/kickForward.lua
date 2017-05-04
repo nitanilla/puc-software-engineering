@@ -1,6 +1,6 @@
 #!/usr/bin/env lua
 
--- Título:				Kick Your Teammates Forward		
+-- Título:				Kick Forward		
 -- Autor:				Renan Almeida & Gabriel Gomes
 -- Última modificação:	02-05-2017
 -- Versão: 				1.0
