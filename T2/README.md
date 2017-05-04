@@ -9,7 +9,7 @@ Gabriel Gomes
 - 03 - Monolith
 - 05 - Pipeline
 - CC - Candy Factory
-- DD - Kick Your Teammate Forward
+- 08 - Kick Forward
 
 ## Anotações
 
