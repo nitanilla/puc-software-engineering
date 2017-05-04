@@ -19,6 +19,6 @@ Gabriel Gomes
 
 - 02/05 - Programação de um dos exemplos com o estilo "candyFactory".
 
-- 03/05 - Programação de um dos exemplos com o estilo "Kick Your Teammate Forward".
+- 03/05 - Programação de um dos exemplos com o estilo "kickForward".
 
 - 03/05 - Estudo de Lua; Programação de um dos exemplos com o estilo "pipeline";
