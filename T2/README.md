@@ -19,6 +19,6 @@ Gabriel Gomes - 1412845
 
 - 02/05 - Programação de um dos exemplos com o estilo "lazyRivers".
 
-- 03/05 - Programação de um dos exemplos com o estilo "lazyRivers".
+- 03/05 - Programação de um dos exemplos com o estilo "kickForward".
 
 - 03/05 - Estudo de Lua; Programação de um dos exemplos com o estilo "pipeline";
