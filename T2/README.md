@@ -2,14 +2,14 @@
 
 Renan Almeida
 
-Gabriel Gomes
+Gabriel Gomes - 1412845
 
 ## Estilos escolhidos
 
 - 03 - Monolith
 - 05 - Pipeline
-- CC - Candy Factory
 - 08 - Kick Forward
+- 27 - Lazy Rivers
 
 ## Anotações
 
@@ -19,6 +19,6 @@ Gabriel Gomes
 
 - 02/05 - Programação de um dos exemplos com o estilo "candyFactory".
 
-- 03/05 - Programação de um dos exemplos com o estilo "kickForward".
+- 03/05 - Programação de um dos exemplos com o estilo "lazyRivers".
 
 - 03/05 - Estudo de Lua; Programação de um dos exemplos com o estilo "pipeline";
