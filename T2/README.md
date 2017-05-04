@@ -17,7 +17,7 @@ Gabriel Gomes - 1412845
 
 - 02/05 - Programação de um dos exemplos com o estilo "monolith".
 
-- 02/05 - Programação de um dos exemplos com o estilo "candyFactory".
+- 02/05 - Programação de um dos exemplos com o estilo "lazyRivers".
 
 - 03/05 - Programação de um dos exemplos com o estilo "lazyRivers".
 
