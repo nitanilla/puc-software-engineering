@@ -8,8 +8,8 @@ Gabriel Gomes
 
 - 03 - Monolith
 - 05 - Pipeline
-- CC - Estilo C
-- DD - Estilo D
+- CC - Candy Factory
+- 08 - Kick Forward
 
 ## Anotações
 
@@ -17,5 +17,8 @@ Gabriel Gomes
 
 - 02/05 - Programação de um dos exemplos com o estilo "monolith".
 
+- 02/05 - Programação de um dos exemplos com o estilo "candyFactory".
+
+- 03/05 - Programação de um dos exemplos com o estilo "kickForward".
+
 - 03/05 - Estudo de Lua; Programação de um dos exemplos com o estilo "pipeline";
-Criação do diagrama para o estilo "pipeline". 
