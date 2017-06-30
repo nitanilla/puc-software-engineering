@@ -107,3 +107,5 @@ for _, v in ipairs(wordsFreqs) do
     end
     counter = counter + 1
 end
+
+-- ver comentarios em pull-request (Roxana)
