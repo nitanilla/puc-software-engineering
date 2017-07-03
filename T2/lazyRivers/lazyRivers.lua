@@ -160,3 +160,4 @@ end
 for word, freq in countedAndSorted(arg[1]) do
     print(word .. ' - ' .. freq)
 end
+--ver comentarios no pull-request (Roxana)
